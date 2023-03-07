@@ -1,6 +1,6 @@
 
 ############################################
-# Veri Ön İşleme
+# Data Pre-processing
 ############################################
 
 import pandas as pd
@@ -42,7 +42,7 @@ def retail_data_prep(dataframe):
 df = retail_data_prep(df)
 
 ############################################
-# ARL Veri Yapısını Hazırlama (Invoice-Product Matrix)
+# Preparing the ARL Data Structure  (Invoice-Product Matrix)
 ############################################
 
 df_de = df[df["Country"] == "Germany"]
@@ -77,7 +77,7 @@ def check_id(dataframe, stock_code):
 check_id(df_de,84945)
 
 ############################################
-# Birliktelik Kurallarının Çıkarılması
+# Making Association Rules
 ############################################
 
 frequent_itemsets = apriori(de_inv_pro_df, min_support=0.01, use_colnames=True)
@@ -88,10 +88,10 @@ rules.sort_values("support", ascending=False).head()
 
 rules.sort_values("lift", ascending=False).head(50)
 
-# Görev 3: ID'leri verilen ürünlerin isimleri nelerdir?
-# Kullanıcı 1 ürün id'si: 21987
-# Kullanıcı 2 ürün id'si: 23235
-# Kullanıcı 3 ürün id'si: 22747
+# Task 3: What are the names of the products whose IDs are given?
+# User 1 product id: 21987
+# User 2 product id: 23235
+# User 3 product id: 22747
 
 check_id(df_de, 21987) # PACK OF 6 SKULL PAPER CUPS
 
@@ -101,7 +101,7 @@ check_id(df_de, 22747) # POPPY'S PLAYHOUSE BATHROOM
 
 
 ############################################
-# Çalışmanın Scriptini Hazırlama
+# Preparing the Script of the Study
 ############################################
 
 # import pandas as pd
@@ -163,10 +163,9 @@ def arl_recommender(rules_df, product_id, rec_count=1):
 
     return recommendation_list[:rec_count]
 
-# Kullanıcı ürün idleri : 21987, 23235, 22747
+# User product ids: 21987, 23235, 22747
 
- # GOREV 4:  Sepetteki kullanıcılar için ürün önerisi
-# yapınız.
+  # MISSION 4: Make a product recommendation for the users in the cart.
 
 product_ids = [21987, 23235, 22747]
 
